@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ### load required packages
 
 library(tidyverse)
@@ -18,18 +17,7 @@ download.file("https://datasets.imdbws.com/name.basics.tsv.gz", destfile = "data
 
 ### read downloaded tsv files
 
-titles <- read.csv("data/title.ratings.tsv.gz", sep = "\t", stringsAsFactors = F)
-=======
-library(tidyverse)
-library(ggthemes)
-library(extrafont)
-library(ggrepel)
-library(scales)
-
-loadfonts(device = "win")
-
 titles <- read.csv("title.ratings.tsv.gz", sep = "\t", stringsAsFactors = F)
->>>>>>> 40232b90848cc221f1531f1cabd39e5aae0cffca
 
 basics <- read.csv("title.basics.tsv.gz", sep = "\t", stringsAsFactors = F)
 
@@ -38,10 +26,7 @@ crew <- read.csv("title.crew.tsv.gz", sep = "\t", stringsAsFactors = F)
 names <- read.csv("name.basics.tsv.gz", sep = "\t", stringsAsFactors = F)
 
 
-<<<<<<< HEAD
 ### select only the horror genre and filter for full length movies
-=======
->>>>>>> 40232b90848cc221f1531f1cabd39e5aae0cffca
 
 horror <- basics %>%
   
@@ -58,15 +43,9 @@ horror <- basics %>%
   filter(titleType == "movie",
          runtimeMinutes > 75,
          numVotes > 500)
-<<<<<<< HEAD
 
 
 ### create the scaled popularity and quality metrics based on number of reviews and average rating
-=======
-  
-
-
->>>>>>> 40232b90848cc221f1531f1cabd39e5aae0cffca
 
 years <- unique(horror$startYear)
 

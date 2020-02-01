@@ -1,13 +1,11 @@
-<<<<<<< HEAD
 library(tidyverse)
 library(ggthemes)
 library(extrafont)
 
+
 loadfonts(device = "win")
 
 
-=======
->>>>>>> 40232b90848cc221f1531f1cabd39e5aae0cffca
 best_ever <- horror_adj %>%
   
   filter(startYear >= 1960) %>%
