@@ -6,7 +6,7 @@ library(ggrepel)
 loadfonts(device = "win")
 
 
-person_name <- "Tobe Hooper" 
+person_name <- "John Carpenter" 
 
 
 name_id <- names %>%
@@ -20,7 +20,7 @@ name_id <- name_id$nconst
 
 career <- horror %>%
   
-  filter(grepl(name_id, directors))
+  filter(grepl(name_id))
 
 
 

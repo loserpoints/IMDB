@@ -1,3 +1,9 @@
+library(tidyverse)
+library(ggthemes)
+library(extrafont)
+library(ggrepel)
+
+
 test <- horror_adj %>%
   
   filter(startYear == 2004)
@@ -217,3 +223,52 @@ ggplot(best_ever, aes(quality, popularity, label = label)) +
         plot.subtitle = element_text(size = 16, face = "italic", family = "Trebuchet MS", hjust = 0.5),
         legend.position = "none")
 
+
+
+
+horror_franchise_list <- 
+  
+  c(
+    "Nightmare on Elm Street",
+    "Friday the 13th",
+    "Final Destination",
+    "Evil Dead",
+    "Candyman",
+    "I Know What You Did Last Summer",
+    "of the Dead",
+    "Scream",
+    "Leprechaun",
+    "Halloween",
+    
+
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+library(rvest)
+
+site <- "https://en.wikipedia.org/wiki/Category:1980s_slasher_films"
+
+slashers_80s <- 
+  
+  read_html(site) %>%
+  
+  html_text() %>%
+  
+  data.frame() %>%
+  
+  rename(title = 1) %>%
+  
+  separate_rows(title, sep = "\n")
