@@ -22,18 +22,18 @@ movies_db <-
 horror_query <- 
   
   "
-  SELECT * FROM imdb_basics 
-	
+  SELECT * FROM imdb_basics
+
 	INNER JOIN imdb_titles
-	
+
 	ON imdb_basics.tconst = imdb_titles.tconst
     AND numVotes > 500
-	
+
 	WHERE genres LIKE '%Horror%'
     AND genres NOT LIKE '%Documentary%'
     AND titleType = 'movie'
     AND runtimeMinutes > 75;
-    
+
     "
 
 horror_db <- dbSendQuery(movies_db, horror_query)

@@ -18,7 +18,7 @@ movies_db <-
   dbConnect(
     MariaDB(), 
     user = "root", 
-    password = "grunge_16", 
+    password = password, 
     dbname = "movies", 
     host = "localhost")
 
