@@ -272,3 +272,21 @@ slashers_80s <-
   rename(title = 1) %>%
   
   separate_rows(title, sep = "\n")
+
+
+
+names_sql <- names_imdb %>% slice(-4227238)
+
+dbWriteTable(movies_db, value = names_sql, row.names = FALSE, name = "imdb_names", overwrite = TRUE )
+
+max(nchar(imdb_names$nconst))
+
+write.csv(names_sql, file = "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/names_sql.csv", row.names = F)
+
+names_sql <- imdb_names %>%
+  
+  mutate(nchar = nchar(primaryName)) %>%
+  
+  filter(nchar != max(nchar)) %>%
+  
+  select(-nchar)

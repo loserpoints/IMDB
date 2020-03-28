@@ -3,34 +3,71 @@
 library(tidyverse)
 
 
-### download files from imdb site
+### get imdb data
 
-download.file("https://datasets.imdbws.com/title.ratings.tsv.gz", destfile = "data/imdb/title.ratings.tsv.gz")
-
-download.file("https://datasets.imdbws.com/title.basics.tsv.gz", destfile = "data/imdb//title.basics.tsv.gz")
-
-download.file("https://datasets.imdbws.com/title.crew.tsv.gz", destfile = "data/imdb//title.crew.tsv.gz")
-
-download.file("https://datasets.imdbws.com/name.basics.tsv.gz", destfile = "data/imdb//name.basics.tsv.gz")
+get_imdb_data()
 
 
-### download and unzip files from movie lens
-download.file("http://files.grouplens.org/datasets/movielens/ml-25m.zip", destfile = "data/movielens/ml-25.zip")
+### get movie lens data
 
-unzip("data/movielens/ml-25.zip", exdir = "data/movielens")
-
-
-### read downloadeded imdb tsv files
-
-imdb_titles <- read.csv("data/imdb//title.ratings.tsv.gz", sep = "\t", stringsAsFactors = F)
-
-imdb_basics <- read.csv("data/imdb//title.basics.tsv.gz", sep = "\t", stringsAsFactors = F)
-
-imdb_crew <- read.csv("data/imdb//title.crew.tsv.gz", sep = "\t", stringsAsFactors = F)
-
-imdb_names <- read.csv("data/imdb//name.basics.tsv.gz", sep = "\t", stringsAsFactors = F)
+get_ml_data()
 
 
-### read unzipped movielens csv files
+### define function to download files from imdb site
 
-ml_tags <- read.csv("data/movielens/tags.csv")
+get_imdb_data <- function(x) {
+  
+  download.file("https://datasets.imdbws.com/title.ratings.tsv.gz",
+                destfile = "data/imdb/title.ratings.tsv.gz")
+  
+  download.file("https://datasets.imdbws.com/title.basics.tsv.gz",
+                destfile = "data/imdb//title.basics.tsv.gz")
+  
+  download.file("https://datasets.imdbws.com/title.crew.tsv.gz",
+                destfile = "data/imdb//title.crew.tsv.gz")
+  
+  download.file("https://datasets.imdbws.com/name.basics.tsv.gz",
+                destfile = "data/imdb//name.basics.tsv.gz")
+  
+  
+  ## read downloadeded imdb tsv files
+  
+  imdb_titles <- read.csv("data/imdb//title.ratings.tsv.gz", sep = "\t", stringsAsFactors = F)
+  
+  imdb_basics <- read.csv("data/imdb//title.basics.tsv.gz", sep = "\t", stringsAsFactors = F)
+  
+  imdb_crew <- read.csv("data/imdb//title.crew.tsv.gz", sep = "\t", stringsAsFactors = F)
+  
+  imdb_names <- read.csv("data/imdb//name.basics.tsv.gz", sep = "\t", stringsAsFactors = F)
+  
+  
+  ## put imdb data frames in list to return
+  
+  imdb_data <- list(imdb_titles, imdb_basics, imdb_crew, imdb_names)
+  
+  return(imdb_data)
+  
+}
+
+
+### define function to download and unzip files from movie lens
+
+get_ml_data <- function(x) {
+  
+  download.file("http://files.grouplens.org/datasets/movielens/ml-25m.zip",
+                destfile = "data/movielens/ml-25.zip")
+  
+  unzip("data/movielens/ml-25.zip", exdir = "data/movielens")
+  
+  
+  ### read unzipped movielens csv files
+  
+  ml_movies <- read.csv("data/ml-25m/movies.csv", stringsAsFactors = F)
+  
+  ml_tags <- read.csv("data/ml-25m/tags.csv", stringsAsFactors = F)
+  
+  ml_links <- read.csv("data/ml-25m/links.csv")
+  
+  ml_ratings <- read.csv("data/ml-25m/ratings.csv")
+    
+}
