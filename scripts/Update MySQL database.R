@@ -34,7 +34,7 @@ update_imdb <- function(x) {
   
   dbWriteTable(
     movies_db,
-    value = imdb_titles,
+    value = imdb_data[[1]],
     row.names = FALSE,
     name = "imdb_titles",
     overwrite = TRUE
@@ -44,7 +44,7 @@ update_imdb <- function(x) {
   
   dbWriteTable(
     movies_db,
-    value = imdb_basics,
+    value = imdb_data[[2]],
     row.names = FALSE,
     name = "imdb_basics",
     overwrite = TRUE
@@ -54,7 +54,7 @@ update_imdb <- function(x) {
   
   dbWriteTable(
     movies_db,
-    value = imdb_crew,
+    value = imdb_data[[3]],
     row.names = FALSE,
     name = "imdb_crew",
     overwrite = TRUE
@@ -62,7 +62,7 @@ update_imdb <- function(x) {
   
   ## update names table
   
-  names_sql <- imdb_names %>%
+  names_sql <- imdb_data[[4]] %>%
     
     mutate(nchar = nchar(primaryName)) %>%
     
@@ -75,6 +75,17 @@ update_imdb <- function(x) {
     value = names_sql,
     row.names = FALSE,
     name = "imdb_names",
+    overwrite = TRUE
+  )
+  
+  
+  ## update tv episodes table
+  
+  dbWriteTable(
+    movies_db,
+    value = imdb_data[[5]],
+    row.names = FALSE,
+    name = "imdb_episodes",
     overwrite = TRUE
   )
   
@@ -101,7 +112,7 @@ update_ml <- function(x) {
   
   dbWriteTable(
     movies_db,
-    value = ml_movies,
+    value = ml_data[[1]],
     row.names = FALSE,
     name = "movie_lens_titles",
     overwrite = TRUE
@@ -111,17 +122,17 @@ update_ml <- function(x) {
   
   dbWriteTable(
     movies_db,
-    value = ml_tags,
+    value = ml_data[[2]],
     row.names = FALSE,
     name = "movie_lens_tags",
     overwrite = TRUE
   )
   
-  ## updateratings table
+  ## update ratings table
   
   dbWriteTable(
     movies_db,
-    value = ml_ratings,
+    value = ml_data[[3]],
     row.names = FALSE,
     name = "movie_lens_ratings",
     overwrite = TRUE
@@ -131,9 +142,29 @@ update_ml <- function(x) {
   
   dbWriteTable(
     movies_db,
-    value = ml_links,
+    value = ml_data[[4]],
     row.names = FALSE,
     name = "movie_lens_links",
+    overwrite = TRUE
+  )
+  
+  ## update genome tags table
+  
+  dbWriteTable(
+    movies_db,
+    value = ml_data[[5]],
+    row.names = FALSE,
+    name = "movie_lens_genome_tags",
+    overwrite = TRUE
+  )
+  
+  ## update genome scores table
+  
+  dbWriteTable(
+    movies_db,
+    value = ml_data[[6]],
+    row.names = FALSE,
+    name = "movie_lens_genome_scores",
     overwrite = TRUE
   )
   

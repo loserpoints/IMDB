@@ -5,12 +5,12 @@ library(tidyverse)
 
 ### get imdb data
 
-get_imdb_data()
+imdb_data <- get_imdb_data()
 
 
 ### get movie lens data
 
-get_ml_data()
+ml_data <- get_ml_data()
 
 
 ### define function to download files from imdb site
@@ -29,6 +29,9 @@ get_imdb_data <- function(x) {
   download.file("https://datasets.imdbws.com/name.basics.tsv.gz",
                 destfile = "data/imdb//name.basics.tsv.gz")
   
+  download.file("https://datasets.imdbws.com/title.episode.tsv.gz",
+                destfile = "data/imdb//title.episode.tsv.gz")
+  
   
   ## read downloadeded imdb tsv files
   
@@ -40,10 +43,12 @@ get_imdb_data <- function(x) {
   
   imdb_names <- read.csv("data/imdb//name.basics.tsv.gz", sep = "\t", stringsAsFactors = F)
   
+  imdb_episodes <- read.csv("data/imdb//title.episode.tsv.gz", sep = "\t", stringsAsFactors = F)
+  
   
   ## put imdb data frames in list to return
   
-  imdb_data <- list(imdb_titles, imdb_basics, imdb_crew, imdb_names)
+  imdb_data <- list(imdb_titles, imdb_basics, imdb_crew, imdb_names, imdb_episodes)
   
   return(imdb_data)
   
@@ -66,8 +71,19 @@ get_ml_data <- function(x) {
   
   ml_tags <- read.csv("data/ml-25m/tags.csv", stringsAsFactors = F)
   
+  ml_ratings <- read.csv("data/ml-25m/ratings.csv")
+  
   ml_links <- read.csv("data/ml-25m/links.csv")
   
-  ml_ratings <- read.csv("data/ml-25m/ratings.csv")
+  ml_genome_tags <- read.csv("data/ml-25m/genome-tags.csv", stringsAsFactors = F)
+  
+  ml_genome_scores <- read.csv("data/ml-25m/genome-scores.csv")
+  
+  
+  ## put movie lens data frames in list to return
+  
+  ml_data <- list(ml_movies, ml_tags, ml_ratings, ml_links, ml_genome_tags, ml_genome_scores)
+  
+  return(ml_data)
     
 }

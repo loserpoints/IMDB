@@ -39,7 +39,9 @@ ggplot(horror_2020, aes(numVotes, averageRating, label = primaryTitle)) +
 ggsave(filename = "horror_2020_scatter.png", width = 21.333, height = 10.666)
 
 
-
+horror_2019 <- horror %>%
+  
+  filter(startYear == 2019)
 
 ggplot(horror_2019, aes(numVotes, averageRating, label = primaryTitle)) +
   

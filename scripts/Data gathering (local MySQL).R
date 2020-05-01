@@ -31,7 +31,7 @@ horror_query <-
 
 	WHERE genres LIKE '%Horror%'
     AND genres NOT LIKE '%Documentary%'
-    AND titleType = 'movie'
+    AND (titleType = 'movie' OR titleType = 'video')
     AND runtimeMinutes > 75;
 
     "
